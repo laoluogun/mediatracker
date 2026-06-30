@@ -40,10 +40,10 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<?> loginUser(@RequestBody AppUsers appUser) {
         AppUsers user = appUsersRepository.findByUsername(appUser.getUsername())
-                .orElseThrow(() -> new RuntimeException("User not found with username: " + appUser.getUsername()));
+                .orElse(null);
 
-        if (!passwordEncoder.matches(appUser.getPassword(), user.getPassword())) {
-            return ResponseEntity.badRequest().body("Invalid password.");
+        if (user == null || !passwordEncoder.matches(appUser.getPassword(), user.getPassword())) {
+            return ResponseEntity.badRequest().body("Invalid username or password.");
         }
 
         String token = jwtUtil.generateToken(user.getUsername());
