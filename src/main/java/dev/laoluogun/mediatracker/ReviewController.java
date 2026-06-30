@@ -7,12 +7,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/reviews")
-public class ReviewTestController {
+public class ReviewController {
     
     private final ReviewRepository reviewRepository;
 
     @Autowired
-    public ReviewTestController(ReviewRepository reviewRepository) {
+    public ReviewController(ReviewRepository reviewRepository) {
         this.reviewRepository = reviewRepository;
     }
 
@@ -24,5 +24,16 @@ public class ReviewTestController {
     @GetMapping
     public List<Review> getAllReviews() {
         return reviewRepository.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public Review getReviewById(@PathVariable Long id) {
+        return reviewRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Review not found with id: " + id));
+    }
+
+    @GetMapping("/user/{userId}")
+    public List<Review> getReviewsByUserId(@PathVariable Long userId) {
+        return reviewRepository.findByUserId(userId);
     }
 }
