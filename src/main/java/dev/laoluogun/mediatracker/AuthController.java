@@ -26,7 +26,11 @@ public class AuthController {
         if (appUsersRepository.findByUsername(appUser.getUsername()).isPresent()) {
             return ResponseEntity.badRequest().body("Username is already taken.");
         }
-        
+
+        if (appUsersRepository.findByEmail(appUser.getEmail()).isPresent()) {
+            return ResponseEntity.badRequest().body("Email already in use");
+        }
+
         AppUsers newUser = new AppUsers(
             appUser.getUsername(),
             appUser.getEmail(),
@@ -45,6 +49,7 @@ public class AuthController {
         if (user == null || !passwordEncoder.matches(appUser.getPassword(), user.getPassword())) {
             return ResponseEntity.badRequest().body("Invalid username or password.");
         }
+        
 
         String token = jwtUtil.generateToken(user.getUsername());
         return ResponseEntity.ok(Map.of("token", token));
