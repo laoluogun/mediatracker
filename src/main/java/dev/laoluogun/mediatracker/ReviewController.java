@@ -9,31 +9,35 @@ import java.util.List;
 @RequestMapping("/api/reviews")
 public class ReviewController {
     
-    private final ReviewRepository reviewRepository;
+   private final ReviewService reviewService;
 
     @Autowired
-    public ReviewController(ReviewRepository reviewRepository) {
-        this.reviewRepository = reviewRepository;
+    public ReviewController(ReviewService reviewService) {
+        this.reviewService = reviewService;
     }
 
     @PostMapping
     public Review createReview(@RequestBody Review review) {
-        return reviewRepository.save(review);
+        return reviewService.createReview(review);
     }
 
     @GetMapping
     public List<Review> getAllReviews() {
-        return reviewRepository.findAll();
+        return reviewService.getAllReviews();
     }
 
     @GetMapping("/{id}")
     public Review getReviewById(@PathVariable Long id) {
-        return reviewRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Review not found with id: " + id));
+        return reviewService.getReviewById(id);
     }
 
     @GetMapping("/user/{userId}")
     public List<Review> getReviewsByUserId(@PathVariable Long userId) {
-        return reviewRepository.findByUserId(userId);
+        return reviewService.getReviewsByUserId(userId);
+    }
+
+    @GetMapping("/media/{mediaItemId}")
+    public List<Review> getReviewsByMediaItemId(@PathVariable Long mediaItemId) {
+        return reviewService.getReviewsByMediaItemId(mediaItemId);
     }
 }

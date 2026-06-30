@@ -27,6 +27,10 @@ public class ReviewService {
     }
 
     public List<Review> getReviewsByUserId(Long userId) {
-        return reviewRepository.findByUserId(userId);
+        return reviewRepository.findByUser_Id(userId);
+    }
+
+    public List<Review> getReviewsByMediaItemId(Long mediaItemId) {
+        return reviewRepository.findByMediaItem_Id(mediaItemId);
     }
 }
