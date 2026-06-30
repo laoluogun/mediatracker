@@ -1,6 +1,5 @@
 package dev.laoluogun.mediatracker;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,7 +10,6 @@ public class UserMediaEntryController {
     
     private final UserMediaEntryService userMediaEntryService;
 
-    @Autowired
     public UserMediaEntryController(UserMediaEntryService userMediaEntryService) {
         this.userMediaEntryService = userMediaEntryService;
     }

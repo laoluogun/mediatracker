@@ -1,7 +1,6 @@
 package dev.laoluogun.mediatracker;
 
 import org.springframework.stereotype.Service;
-import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 @Service
@@ -9,7 +8,6 @@ public class AppUsersService {
     
     private final AppUsersRepository appUsersRepository;
 
-    @Autowired
     public AppUsersService(AppUsersRepository appUsersRepository) {
         this.appUsersRepository = appUsersRepository;
     }

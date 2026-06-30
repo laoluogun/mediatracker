@@ -1,6 +1,5 @@
 package dev.laoluogun.mediatracker;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -10,7 +9,6 @@ public class AppUsersController {
 
     private final AppUsersService appUsersService;
 
-    @Autowired
     public AppUsersController(AppUsersService appUsersService) {
         this.appUsersService = appUsersService;
     }

@@ -1,14 +1,12 @@
 package dev.laoluogun.mediatracker;
 
 import org.springframework.stereotype.Service;
-import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 @Service
 public class UserMediaEntryService {
     private final UserMediaEntryRepository userMediaEntryRepository;
 
-    @Autowired
     public UserMediaEntryService(UserMediaEntryRepository userMediaEntryRepository) {
         this.userMediaEntryRepository = userMediaEntryRepository;
     }
