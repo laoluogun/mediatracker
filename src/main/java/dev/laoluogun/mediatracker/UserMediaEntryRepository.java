@@ -1,4 +1,4 @@
-package dev.laoluogun;
+package dev.laoluogun.mediatracker;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

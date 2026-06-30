@@ -1,7 +1,5 @@
-package dev.laoluogun;
+package dev.laoluogun.mediatracker;
 
-import dev.laoluogun.mediatracker.AppUsers;
-import dev.laoluogun.mediatracker.MediaItem;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 

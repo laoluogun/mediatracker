@@ -1,4 +1,4 @@
-package dev.laoluogun;
+package dev.laoluogun.mediatracker;
 
 public enum MediaStatus {
     WATCHING,
