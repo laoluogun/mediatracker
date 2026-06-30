@@ -10,7 +10,7 @@ import java.util.Date;
 import javax.crypto.SecretKey;
 
 @Component
-public class JwTUtil {
+public class JwtUtil {
     
     private final String SECRET_KEY = "your-256-bit-secret-your-256-bit-secret"; 
     private final long EXPIRATION_MS = 86400000; // 1 day in milliseconds
