@@ -1,5 +1,6 @@
 package dev.laoluogun.mediatracker;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -12,7 +13,8 @@ import javax.crypto.SecretKey;
 @Component
 public class JwtUtil {
     
-    private final String SECRET_KEY = "your-256-bit-secret-your-256-bit-secret"; 
+    @Value("${jwt.secret}")
+    private String SECRET_KEY;
     private final long EXPIRATION_MS = 86400000; // 1 day in milliseconds
 
     private SecretKey getSigningKey() {
