@@ -28,4 +28,11 @@ public class MediaItemController {
     public MediaItem getMediaItemById(@PathVariable Long id) {
         return mediaItemService.getMediaItemById(id);
     }
+
+    @GetMapping("/search")
+    public List<MediaItem> searchManga(@RequestParam String query) {
+        return mediaItemService.searchManga(query);
+    }
+
 }
+

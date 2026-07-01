@@ -6,10 +6,18 @@ import java.util.List;
 @Service
 public class MediaItemService {
     
+    
     private final MediaItemRepository mediaItemRepository;
 
-    public MediaItemService(MediaItemRepository mediaItemRepository) {
-        this.mediaItemRepository = mediaItemRepository;
+    private final JikanService jikanService;
+
+    public MediaItemService(MediaItemRepository mediaItemRepository, JikanService jikanService) {
+    this.mediaItemRepository = mediaItemRepository;
+    this.jikanService = jikanService;
+    }
+
+    public List<MediaItem> searchManga(String query) {
+        return jikanService.searchManga(query);
     }
 
     public MediaItem createMediaItem(MediaItem mediaItem) {
