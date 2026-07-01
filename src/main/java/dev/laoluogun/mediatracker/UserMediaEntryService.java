@@ -2,6 +2,8 @@ package dev.laoluogun.mediatracker;
 
 import org.springframework.stereotype.Service;
 import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 @Service
 public class UserMediaEntryService {
@@ -15,8 +17,8 @@ public class UserMediaEntryService {
         return userMediaEntryRepository.save(userMediaEntry);
     }
 
-    public List<UserMediaEntry> getAllUserMediaEntries() {
-        return userMediaEntryRepository.findAll();
+    public Page<UserMediaEntry> getAllUserMediaEntries(Pageable pageable) {
+        return userMediaEntryRepository.findAll(pageable);
     }
 
     public UserMediaEntry getUserMediaEntryById(Long id) {

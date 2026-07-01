@@ -3,6 +3,8 @@ package dev.laoluogun.mediatracker;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 @RestController
 @RequestMapping("/api/media-entries")
@@ -20,8 +22,8 @@ public class UserMediaEntryController {
     }
 
     @GetMapping
-    public List<UserMediaEntry> getAllUserMediaEntries() {
-        return userMediaEntryService.getAllUserMediaEntries();
+    public Page<UserMediaEntry> getAllUserMediaEntries(Pageable pageable) {
+        return userMediaEntryService.getAllUserMediaEntries(pageable);
     }
 
     @GetMapping("/{id}")

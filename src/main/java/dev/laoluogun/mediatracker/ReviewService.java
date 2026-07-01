@@ -2,6 +2,8 @@ package dev.laoluogun.mediatracker;
 
 import org.springframework.stereotype.Service;
 import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 @Service
 public class ReviewService {
@@ -15,8 +17,8 @@ public class ReviewService {
         return reviewRepository.save(review);
     }
 
-    public List<Review> getAllReviews() {
-        return reviewRepository.findAll();
+    public Page<Review> getAllReviews(Pageable pageable) {
+        return reviewRepository.findAll(pageable);
     }
 
     public Review getReviewById(Long id) {

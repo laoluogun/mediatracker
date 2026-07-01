@@ -1,6 +1,8 @@
 package dev.laoluogun.mediatracker;
 
 import org.springframework.web.bind.annotation.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -20,8 +22,8 @@ public class ReviewController {
     }
 
     @GetMapping
-    public List<Review> getAllReviews() {
-        return reviewService.getAllReviews();
+    public Page<Review> getAllReviews(Pageable pageable) {
+        return reviewService.getAllReviews(pageable);
     }
 
     @GetMapping("/{id}")
