@@ -3,6 +3,8 @@ package dev.laoluogun.mediatracker;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.http.ResponseEntity;
+import jakarta.validation.Valid;
+
 
 import java.util.Map;
 
@@ -22,21 +24,18 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> registerUser(@RequestBody AppUsers appUser) {
-        if (appUsersRepository.findByUsername(appUser.getUsername()).isPresent()) {
+    public ResponseEntity<?> registerUser(@Valid @RequestBody RegisterRequest request) {
+        if (appUsersRepository.findByUsername(request.getUsername()).isPresent()) {
             return ResponseEntity.badRequest().body("Username is already taken.");
         }
-
-        if (appUsersRepository.findByEmail(appUser.getEmail()).isPresent()) {
+        if (appUsersRepository.findByEmail(request.getEmail()).isPresent()) {
             return ResponseEntity.badRequest().body("Email already in use");
         }
-
         AppUsers newUser = new AppUsers(
-            appUser.getUsername(),
-            appUser.getEmail(),
-            passwordEncoder.encode(appUser.getPassword())
+            request.getUsername(),
+            request.getEmail(),
+            passwordEncoder.encode(request.getPassword())
         );
-     
         appUsersRepository.save(newUser);
         return ResponseEntity.ok("User registered successfully.");
     }
