@@ -3,6 +3,9 @@ package dev.laoluogun.mediatracker;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 @Service
 public class MediaItemService {
     
@@ -24,8 +27,8 @@ public class MediaItemService {
         return mediaItemRepository.save(mediaItem);
     }
 
-    public List<MediaItem> getAllMediaItems() {
-        return mediaItemRepository.findAll();
+    public Page<MediaItem> getAllMediaItems(Pageable pageable) {
+    return mediaItemRepository.findAll(pageable);
     }
 
     public MediaItem getMediaItemById(Long id) {
