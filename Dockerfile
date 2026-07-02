@@ -1,11 +1,5 @@
-FROM eclipse-temurin:17-jdk-alpine AS build
-WORKDIR /app
-COPY . .
-RUN chmod +x gradlew
-RUN GRADLE_OPTS="-Xmx512m -Xms256m" ./gradlew bootJar --no-daemon -x test
-
 FROM eclipse-temurin:17-jre-alpine
 WORKDIR /app
-COPY --from=build /app/build/libs/*.jar app.jar
+COPY build/libs/*.jar app.jar
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "app.jar"]
