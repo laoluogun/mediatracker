@@ -12,7 +12,7 @@ public class OMDbService {
     private final RestClient restClient;
     private final MediaItemRepository mediaItemRepository;
 
-    @Value("${OMDb.api.key}")
+    @Value("${omdb.api.key}")
     private String apiKey;
 
     public OMDbService(MediaItemRepository mediaItemRepository) {
