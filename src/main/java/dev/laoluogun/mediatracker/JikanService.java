@@ -50,5 +50,42 @@ public class JikanService {
                     );
                     return mediaItemRepository.save(item);
                 });
+                
     }
+
+    public List<MediaItem> searchAnime(String query) {
+    JikanAnimeResponse response = restClient.get()
+            .uri("https://api.jikan.moe/v4/anime?q={query}&limit=5", query)
+            .retrieve()
+            .body(JikanAnimeResponse.class);
+
+    if (response == null || response.getData() == null) {
+        return List.of();
+    }
+
+    return response.getData().stream()
+            .map(this::mapToMediaItem)
+            .collect(Collectors.toList());
+}
+
+private MediaItem mapToMediaItem(JikanAnimeResponse.AnimeData animeData) {
+    String externalId = "anime-" + animeData.getMalId();
+
+    return mediaItemRepository.findByExternalId(externalId)
+            .orElseGet(() -> {
+                MediaItem item = new MediaItem(
+                        animeData.getTitle(),
+                        MediaType.ANIME,
+                        externalId,
+                        animeData.getSynopsis(),
+                        null,
+                        animeData.getImages() != null &&
+                        animeData.getImages().getJpg() != null
+                                ? animeData.getImages().getJpg().getImageUrl()
+                                : null,
+                        animeData.getEpisodes()
+                );
+                return mediaItemRepository.save(item);
+            });
+}
 }
