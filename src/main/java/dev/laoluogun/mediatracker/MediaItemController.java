@@ -36,5 +36,9 @@ public class MediaItemController {
         return mediaItemService.searchManga(query);
     }
 
+    @GetMapping("/search/anime")
+    public List<MediaItem> searchAnime(@RequestParam String query) {
+        return mediaItemService.searchAnime(query);
+    }
 }
 
