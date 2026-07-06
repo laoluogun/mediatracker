@@ -23,6 +23,10 @@ public class MediaItemService {
         return jikanService.searchManga(query);
     }
 
+    public List<MediaItem> searchAnime(String query) {
+    return jikanService.searchAnime(query);
+}
+
     public MediaItem createMediaItem(MediaItem mediaItem) {
         return mediaItemRepository.save(mediaItem);
     }
