@@ -27,12 +27,12 @@ public class JikanService {
         }
 
         return response.getData().stream()
-                .map(this::mapToMediaItem)
+                .map(this::mapMangaToMediaItem)
                 .collect(Collectors.toList());
     }
 
-    private MediaItem mapToMediaItem(JikanMangaResponse.MangaData mangaData) {
-        String externalId = String.valueOf(mangaData.getMalId());
+    private MediaItem mapMangaToMediaItem(JikanMangaResponse.MangaData mangaData) {
+            String externalId = "manga-" + mangaData.getMalId();
 
         return mediaItemRepository.findByExternalId(externalId)
                 .orElseGet(() -> {
@@ -64,11 +64,11 @@ public class JikanService {
     }
 
     return response.getData().stream()
-            .map(this::mapToMediaItem)
+            .map(this::mapAnimeToMediaItem)
             .collect(Collectors.toList());
 }
 
-private MediaItem mapToMediaItem(JikanAnimeResponse.AnimeData animeData) {
+private MediaItem mapAnimeToMediaItem(JikanAnimeResponse.AnimeData animeData) {
     String externalId = "anime-" + animeData.getMalId();
 
     return mediaItemRepository.findByExternalId(externalId)

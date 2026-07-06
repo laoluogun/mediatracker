@@ -24,8 +24,8 @@ public class MediaItemService {
     }
 
     public List<MediaItem> searchAnime(String query) {
-    return jikanService.searchAnime(query);
-}
+        return jikanService.searchAnime(query);
+    }
 
     public MediaItem createMediaItem(MediaItem mediaItem) {
         return mediaItemRepository.save(mediaItem);

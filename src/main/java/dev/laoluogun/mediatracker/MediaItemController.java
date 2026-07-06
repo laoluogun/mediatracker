@@ -31,7 +31,7 @@ public class MediaItemController {
         return mediaItemService.getMediaItemById(id);
     }
 
-    @GetMapping("/search")
+    @GetMapping("/search/manga")
     public List<MediaItem> searchManga(@RequestParam String query) {
         return mediaItemService.searchManga(query);
     }
