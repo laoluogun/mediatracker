@@ -40,5 +40,10 @@ public class MediaItemController {
     public List<MediaItem> searchAnime(@RequestParam String query) {
         return mediaItemService.searchAnime(query);
     }
+
+    @GetMapping("/search/movies")
+    public List<MediaItem> searchMovies(@RequestParam String query) {
+        return mediaItemService.searchMovies(query);
+    }
 }
 

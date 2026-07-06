@@ -14,9 +14,12 @@ public class MediaItemService {
 
     private final JikanService jikanService;
 
-    public MediaItemService(MediaItemRepository mediaItemRepository, JikanService jikanService) {
+    private final OMDbService omdbService;
+
+    public MediaItemService(MediaItemRepository mediaItemRepository, JikanService jikanService, OMDbService omdbService) {
     this.mediaItemRepository = mediaItemRepository;
     this.jikanService = jikanService;
+    this.omdbService = omdbService;
     }
 
     public List<MediaItem> searchManga(String query) {
@@ -25,6 +28,10 @@ public class MediaItemService {
 
     public List<MediaItem> searchAnime(String query) {
         return jikanService.searchAnime(query);
+    }
+
+    public List<MediaItem> searchMovies(String query) {
+        return omdbService.searchMovies(query);
     }
 
     public MediaItem createMediaItem(MediaItem mediaItem) {
