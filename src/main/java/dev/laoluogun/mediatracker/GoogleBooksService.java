@@ -1,5 +1,7 @@
 package dev.laoluogun.mediatracker;
 
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 import java.util.List;
@@ -11,6 +13,9 @@ public class GoogleBooksService {
     private final RestClient restClient;
     private final MediaItemRepository mediaItemRepository;
 
+    @Value("${google.books.api.key}")
+    private String apiKey;
+
     public GoogleBooksService(MediaItemRepository mediaItemRepository) {
         this.restClient = RestClient.create();
         this.mediaItemRepository = mediaItemRepository;
@@ -18,7 +23,7 @@ public class GoogleBooksService {
 
     public List<MediaItem> searchBooks(String query) {
         GoogleBooksResponse response = restClient.get()
-                .uri("https://www.googleapis.com/books/v1/volumes?q={query}&maxResults=5", query)
+                .uri("https://www.googleapis.com/books/v1/volumes?q={query}&maxResults=5&key={apiKey}", query, apiKey)
                 .retrieve()
                 .body(GoogleBooksResponse.class);
 
