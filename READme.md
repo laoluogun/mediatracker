@@ -12,3 +12,7 @@ So far only the Manga item has been configured so this will be updated to includ
 ## 7/6/2026 
 
 Anime item has been configured! OMDb next.
+
+## 7/6/2026
+
+Implementing OMDb and GoogleBooks was quite simple. Same format as Jikan just needed to add API keys. Project complete and deployed to AWS!
