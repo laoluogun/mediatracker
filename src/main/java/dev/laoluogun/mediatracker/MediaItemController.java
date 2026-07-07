@@ -5,6 +5,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 @RequestMapping("/api/media")
@@ -45,5 +48,10 @@ public class MediaItemController {
     public List<MediaItem> searchMovies(@RequestParam String query) {
         return mediaItemService.searchMovies(query);
     }
+    @GetMapping("search/books")
+    public List<MediaItem> searchBooks(@RequestParam String query) {
+        return mediaItemService.searchBooks(query);
+    }
+    
 }
 

@@ -16,10 +16,13 @@ public class MediaItemService {
 
     private final OMDbService omdbService;
 
-    public MediaItemService(MediaItemRepository mediaItemRepository, JikanService jikanService, OMDbService omdbService) {
+    private final GoogleBooksService googleBooksService;
+
+    public MediaItemService(MediaItemRepository mediaItemRepository, JikanService jikanService, OMDbService omdbService, GoogleBooksService googleBooksService) {
     this.mediaItemRepository = mediaItemRepository;
     this.jikanService = jikanService;
     this.omdbService = omdbService;
+    this.googleBooksService = googleBooksService;
     }
 
     public List<MediaItem> searchManga(String query) {
@@ -32,6 +35,10 @@ public class MediaItemService {
 
     public List<MediaItem> searchMovies(String query) {
         return omdbService.searchMovies(query);
+    }
+
+    public List<MediaItem> searchBooks(String query) {
+        return googleBooksService.searchBooks(query);
     }
 
     public MediaItem createMediaItem(MediaItem mediaItem) {
