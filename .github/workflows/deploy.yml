@@ -15,6 +15,20 @@ jobs:
   build-and-test:
     name: Build & Test
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_DB: mediatracker
+          POSTGRES_USER: mediatracker
+          POSTGRES_PASSWORD: mediatracker
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -30,6 +44,10 @@ jobs:
         run: chmod +x gradlew
 
       - name: Run tests
+        env:
+          SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/mediatracker
+          SPRING_DATASOURCE_USERNAME: mediatracker
+          SPRING_DATASOURCE_PASSWORD: mediatracker
         run: ./gradlew test
 
       - name: Build JAR
